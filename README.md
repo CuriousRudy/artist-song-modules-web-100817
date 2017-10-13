@@ -45,7 +45,7 @@ module Memorable
 end
 ```
 
-Inside here, define your `reset_all` and `count` methods. 
+Inside here, define your `reset_all` and `count` methods.
 
 Important! Remember to add `require_relative '../lib/concerns/memorable'` to your environment file before running any tests. We've already provided that line for you in fact! All you have to do is un-comment it out. :)
 
@@ -70,7 +70,7 @@ Artist.find_by_name("Adele")
 #=> #<Artistx038230sdcmdn3872>
 ```
 
-Extract the code from the `find_by_name` methods that you'll see in the `Artist` and `Song` classes and place it inside the `Findable` module's `find_by_name` method. 
+Extract the code from the `find_by_name` methods that you'll see in the `Artist` and `Song` classes and place it inside the `Findable` module's `find_by_name` method.
 
 Remember that we need to keep the content of this method abstract. So, inside the `Artist` class, a `find_by_name` method might look like this:
 
@@ -78,24 +78,24 @@ Remember that we need to keep the content of this method abstract. So, inside th
 class Artist
 
   @@artists = []
-  
+
   attr_accessor :name
-  
+
   def initialize(name)
     @name = name
   end
-  
+
   def self.all
     @@artists
   end
-  
+
   def self.find_by_name(name)
     @@artists.detect {|a| a.name == name}
   end
 end
 ```
 
-Inside the `Findable.find_by_name` method, we can't use a class-specific class variable like `@@artists`, because our method would break when included in any class that *didn't* define such a variable. 
+Inside the `Findable.find_by_name` method, we can't use a class-specific class variable like `@@artists`, because our method would break when included in any class that *didn't* define such a variable.
 
 Is there a way to reference the collection of *all* of the instances of a class, without specifically referencing class variables that are only defined in certain classes?
 
